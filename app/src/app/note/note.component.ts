@@ -31,6 +31,7 @@ export class NoteComponent implements OnInit {
     if (this.newNote.title && this.newNote.content != '') {
       // this.notes.push(this.newNote);
       this.newNote.id = this.fdb.createId();
+      this.newNote.is_favorite = false;
 
       this.noteRef.doc(this.newNote.id)
       this.noteRef.doc(this.newNote.id).set(Object.assign({}, this.newNote))
@@ -48,6 +49,10 @@ export class NoteComponent implements OnInit {
     .catch((error) => { alert(error); });
     console.log(note.id)
   }
+
+  debug(note: Note) {
+    console.log(note.is_favorite);
+  } 
 
 }
 

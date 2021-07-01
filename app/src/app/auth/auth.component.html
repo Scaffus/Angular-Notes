@@ -1,0 +1,20 @@
+<p>auth works!</p>
+
+<div class="container">
+    <form (submit)="signUpWithEmailAndPassword()">
+
+        <label for="input-mail">Mail</label>
+        <input type="text" name="input-mail" [(ngModel)]="newUser.email" id="input-mail">
+        <!-- <input type="text" name="input-mail" id="input-mail"> -->
+
+
+        <label for="input-password">Password</label>
+        <input type="password" name="input-password" [(ngModel)]="newUser.password" id="input-password">
+        <!-- <input type="password" name="input-password" id="input-password"> -->
+
+
+
+        <input type="submit" value="Sign Up" class="note-submit">
+
+    </form>
+</div>
