@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+
+$primary: #bdbdbd;
+$primary-light: #efefef;
+$primary-dark: #8d8d8d;
+$secondary: #cfd8dc;
+$secondary-light: #ffffff;
+$secondary-dark: #9ea7aa;
+$text-primary: #636363;
+$text-secondary: #969696;
+
+* {
+  font-family: 'Nunito', sans-serif;
+  color: $text-primary;
+}

@@ -1,0 +1,29 @@
+<div class="container">
+  <form (submit)="addNote()" class="note-form">
+    <!-- Note title -->
+    <label for="note-input-title" class="note-input">Title</label>
+    <input type="text" name="noteInputTitle" id="note-input-title" class="note-input" [(ngModel)]="newNote.title"/>
+
+    <!-- Note content -->
+    <label for="note-input-content" class=" note-input">Content</label>
+    <textarea type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30" rows="10" [(ngModel)]="newNote.content"></textarea>
+
+    <input type="submit" value="Add note" class="note-submit">
+  </form>
+</div>
+
+<div class="container">
+  <div class="notes">
+    <li *ngFor="let note of notes | async; let id = index;">
+      <div class="note">
+        <ul class="note">
+          <!-- <a class="note-title" (click)="toggleDisplay()"><p class="note-title">{{ note.title }}</p></a> -->
+          <a class="note-title" (click)="hideme[id] = !hideme[id]" (*ngSwitchDefault)="hideme[id] = true"><p class="note-title">{{ note.title }}</p></a>
+          <!-- <p class="note-content" [hidden]="isShow">{{ note.content }}</p> -->
+          <p class="note-content" [hidden]="hideme[id]">{{ note.content }}</p>
+          <a class="note-delete" [hidden]="hideme[id]" (click)="deleteNote(note)" style="text-decoration: underline;">Delete</a>
+        </ul>
+      </div>
+    </li>
+  </div>
+</div>

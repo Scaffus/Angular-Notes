@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "notes-8db5f": {
+      "hosting": {
+        "app": [
+          "notes-8db5f"
+        ]
+      }
+    }
+  }
+}

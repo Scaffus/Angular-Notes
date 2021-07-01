@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+
+$primary: #bdbdbd;
+$primary-light: #efefef;
+$primary-dark: #8d8d8d;
+$secondary: #cfd8dc;
+$secondary-light: #ffffff;
+$secondary-dark: #9ea7aa;
+$text-primary: #B9B9B9;
+$text-secondary: #CAD3D7;
+
+.note-form {
+
+  label.note-input, input.note-input, textarea.note-input {
+    display: block;
+    width: 100%;
+    color: $secondary-dark;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  input.note-input, textarea.note-input {
+    margin-bottom: 1.3em;
+    border: 2px solid $secondary;
+    border-radius: .3em;
+    padding: .3em;
+    cursor: text;
+  }
+
+  input.note-input {
+    font-size: 1.5em;
+  }
+
+  textarea.note-input {
+    overflow: auto;
+    resize: none;
+    font-size: 1.1em;
+  }
+
+  input.note-submit {
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    text-align: center;
+
+    border: 2px solid $secondary;
+    border-radius: .3em;
+    color: $secondary-dark;
+    background-color: $secondary-light;
+
+    font-size: 1em;
+    padding: .3em;
+  }
+}
+
+
+.notes {
+
+  li {
+    list-style: none;
+
+    div.note {
+      border-left: .7em solid $secondary;
+      border-radius: .3em;
+      background-color: rgba($secondary, 0.05);
+
+      .note-title {
+        color: $primary-dark;
+        font-size: 1.5em;
+        font-weight: 700;
+      }
+
+      .note-content {
+        color: $primary-dark;
+      }
+
+
+
+      a.note-delete {
+        cursor: pointer;
+        color: $text-primary;
+      }
+    }
+  }
+
+  div:hover {
+    animation: divNoteHover .2s forwards;
+  }
+
+  a:hover {
+    animation: aNoteDeleteHover .5s forwards;
+  }
+}
+
+@keyframes divNoteHover {
+	from {background-color: rgba($secondary, 0.05);}
+	to {background-color: rgba($secondary, .15);}
+}
+
+@keyframes aNoteDeleteHover {
+	from {color: $text-primary;}
+	to {color: red;}
+}
