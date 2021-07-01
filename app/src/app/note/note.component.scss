@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
 
 $primary: #bdbdbd;
 $primary-light: #efefef;
@@ -6,23 +6,47 @@ $primary-dark: #8d8d8d;
 $secondary: #cfd8dc;
 $secondary-light: #ffffff;
 $secondary-dark: #9ea7aa;
-$text-primary: #B9B9B9;
-$text-secondary: #CAD3D7;
+$text-primary: #b9b9b9;
+$text-secondary: #cad3d7;
 
 .note-form {
+  border-left: 0.7em solid $secondary;
+  border-radius: 0.3em;
+  background-color: rgba($secondary, 0.08);
+  margin-top: 3em;
+  padding: 0.5em;
 
-  label.note-input, input.note-input, textarea.note-input {
-    display: block;
-    width: 100%;
-    color: $secondary-dark;
-    font-family: 'Nunito', sans-serif;
+  .note-title {
+    color: $primary-dark;
+    font-weight: 700;
+    margin-bottom: 0;
+    margin-left: 0.5em;
+    font-size: 2.5em;
+    margin-top: 0;
+    text-align: center;
   }
 
-  input.note-input, textarea.note-input {
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  label.note-input,
+  input.note-input,
+  textarea.note-input {
+    display: block;
+    width: 90%;
+    margin-left: 1em;
+    color: $secondary-dark;
+    font-family: "Nunito", sans-serif;
+  }
+
+  input.note-input,
+  textarea.note-input {
     margin-bottom: 1.3em;
     border: 2px solid $secondary;
-    border-radius: .3em;
-    padding: .3em;
+    border-radius: 0.3em;
+    padding: 0.3em;
     cursor: text;
   }
 
@@ -43,37 +67,42 @@ $text-secondary: #CAD3D7;
     text-align: center;
 
     border: 2px solid $secondary;
-    border-radius: .3em;
+    border-radius: 0.3em;
     color: $secondary-dark;
     background-color: $secondary-light;
 
     font-size: 1em;
-    padding: .3em;
+    padding: 0.3em;
   }
 }
 
-
 .notes {
-
   li {
     list-style: none;
 
+    .note-header {
+      a.note-favorite {
+        float: right;
+        margin-right: .3em;
+      }
+    }
+
     div.note {
-      border-left: .7em solid $secondary;
-      border-radius: .3em;
-      background-color: rgba($secondary, 0.05);
+      border-left: 0.7em solid $secondary;
+      border-radius: 0.3em;
+      background-color: rgba($secondary, 0.08);
 
       .note-title {
         color: $primary-dark;
         font-size: 1.5em;
         font-weight: 700;
+        margin-bottom: 0;
       }
 
       .note-content {
         color: $primary-dark;
+        margin-bottom: 1.5em;
       }
-
-
 
       a.note-delete {
         cursor: pointer;
@@ -82,21 +111,30 @@ $text-secondary: #CAD3D7;
     }
   }
 
-  div:hover {
-    animation: divNoteHover .2s forwards;
+  div.note:hover {
+    animation: divNoteHover 0.2s forwards;
+    transition: animation 0.3s ease-in-out;
   }
 
   a:hover {
-    animation: aNoteDeleteHover .5s forwards;
+    animation: aNoteDeleteHover 0.5s forwards;
   }
 }
 
 @keyframes divNoteHover {
-	from {background-color: rgba($secondary, 0.05);}
-	to {background-color: rgba($secondary, .15);}
+  from {
+    background-color: rgba($secondary, 0.08);
+  }
+  to {
+    background-color: rgba($secondary, 0.18);
+  }
 }
 
 @keyframes aNoteDeleteHover {
-	from {color: $text-primary;}
-	to {color: red;}
+  from {
+    color: $text-primary;
+  }
+  to {
+    color: red;
+  }
 }
