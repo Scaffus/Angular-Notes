@@ -11,7 +11,7 @@ import { User } from '../models/User';
 })
 export class AuthComponent implements OnInit {
 
-  newUser: User = new User();
+  user: User = new User();
 
   constructor() { }
 
@@ -19,20 +19,44 @@ export class AuthComponent implements OnInit {
   }
 
   signUpWithEmailAndPassword() {
-    var email = this.newUser.email;
-    var password = this.newUser.password;
+    var email = this.user.email; // 'mail@mail.com'; 
+    var password = this.user.password; // 'passWord'; 
 
-    console.log('email: ' + email, + ' password: ' + password)
-    firebase.initializeApp(environment)
+    if (email != '' && password.length >= 8) {
+      firebase.initializeApp(environment.firebase)
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          var user = userCredential.user;
 
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        var user = userCredential.user;
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-      })
+          console.log('Created user: ' + user)
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+        })
+    } else {
+      console.log('Password must be at lease 8 characters, size of current ' + password.length)
+    }
   }
 
+  signInWithEmailPassword() {
+    var email = this.user.email;
+    var password = this.user.password;
+
+    if (email != '' && password.length >= 8) {
+      firebase.initializeApp(environment.firebase)
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          var user = userCredential.user;
+
+          console.log('Signed in with mail: ' + user?.email)
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+        });
+    } else {
+      console.log('Password must be at lease 8 characters, size of current ' + password.length)
+    }
+  }
 }
