@@ -34,6 +34,10 @@ export class NoteComponent implements OnInit {
   hideme = [false];
   hideNoteForm = true;
 
+  editor_note: Note = new Note();
+  showNoteEditor = false;
+  edit_note: Note = new Note();
+
   showLoginUserForm = false;
   showCreateUserForm = false;
   user: User = new User();
@@ -77,6 +81,15 @@ export class NoteComponent implements OnInit {
     await this.afs.collection('notes').doc(this.uid).collection('notes').doc(note.id).delete()
     .catch((error) => { alert(error); });
     console.log(note.id)
+  }
+
+  openNoteEditor(note: Note) {
+    this.editor_note = note;
+    this.showNoteEditor = true;
+  }
+
+  async editNote(uid: string, note: Note) {
+    await this.afs.collection('notes').doc(this.uid).collection('notes').doc(note.id).delete()
   }
 
   noteIsFavorite(note: Note) {
