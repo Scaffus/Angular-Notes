@@ -84,12 +84,14 @@ export class NoteComponent implements OnInit {
   }
 
   openNoteEditor(note: Note) {
-    this.editor_note = note;
+    this.edit_note = note;
     this.showNoteEditor = true;
   }
 
   async editNote(uid: string, note: Note) {
-    await this.afs.collection('notes').doc(this.uid).collection('notes').doc(note.id).delete()
+    await this.afs.collection('notes').doc(this.uid).collection('notes').doc(note.id).update(note)
+    .catch((error) => { alert(error); });
+    this.showNoteEditor = false;
   }
 
   noteIsFavorite(note: Note) {

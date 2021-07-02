@@ -161,9 +161,10 @@ a.logout:hover {
       }
 
       a.note-edit {
-        margin: .2em;
+        margin: 0.2em;
         cursor: pointer;
         color: $text-primary;
+        margin-left: 0.6em;
       }
 
       a.note-delete:hover {
@@ -271,6 +272,65 @@ a.logout:hover {
   height: 100%;
   top: 0;
   right: 0;
+
+  .editor-note-form {
+    background-color: #fbfcfc;
+    border-left: calc(0.5em + 0.4vmin) solid $secondary;
+    border-radius: 0.3em;
+    text-align: center;
+    width: calc(60% + 20vmin);
+    padding-right: calc(2em + 1.8vmin);
+    padding-left: calc(2em + 1.8vmin);
+    height: fit-content;
+    padding: 2em;
+    margin: 0 auto;
+    position: relative;
+    top: calc(7em + 5vmin);
+
+    label.note-input,
+    input.note-input,
+    textarea.note-input {
+      display: block;
+      text-align: center;
+      color: $secondary-dark;
+      font-family: "Nunito", sans-serif;
+    }
+
+    input.note-input,
+    textarea.note-input {
+      margin-bottom: 1.3em;
+      border: 2px solid $secondary;
+      border-radius: 0.3em;
+      text-align: left;
+      // padding: 0.3em;
+      cursor: text;
+      width: 90%;
+    }
+
+    // input.note-input {
+    //   font-size: 1.5em;
+    // }
+
+    textarea.note-input {
+      overflow: auto;
+      resize: none;
+      // font-size: 1.1em;
+    }
+
+    input.note-submit {
+      display: block;
+      box-sizing: border-box;
+      margin: 0 auto;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid $secondary;
+      border-radius: 0.3em;
+      color: $secondary-dark;
+      background-color: $secondary-light;
+      padding: 0.3em;
+      
+    }
+  }
 }
 
 @keyframes divNoteHover {
@@ -298,6 +358,7 @@ a.logout:hover {
   }
   to {
     color: rgb(0, 119, 255);
+    border-color: rgb(0, 119, 255);
   }
 }
 

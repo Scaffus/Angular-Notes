@@ -8,18 +8,18 @@
     <form (submit)="addNote(user.uid)" class="note-form">
       <a (click)="hideNoteForm = !hideNoteForm">
         <p id="large" class="note-title">New Note <strong [hidden]="!hideNoteForm">
-            <p id="smol" style="font-size: 0.7em;" class="note-tip-create-note">Click to open note creation</p>
+            <p id="smol" class="note-tip-create-note">Click to open note creation</p>
           </strong></p>
       </a>
       <!-- Note title -->
       <div [hidden]="hideNoteForm">
         <label id="medium" for="note-input-title" class="note-input">Title</label>
-        <input id="medium" type="text" name="noteInputTitle" id="note-input-title" class="note-input"
+        <input id="medium" style="font-size: 1.6em;" type="text" name="noteInputTitle" id="note-input-title" class="note-input"
           [(ngModel)]="newNote.title" maxlength="200" />
 
         <!-- Note content -->
         <label id="medium" for="note-input-content" class=" note-input">Content</label>
-        <textarea id="medium" type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30"
+        <textarea id="medium" style="font-size: 1.35em;" type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30"
           rows="10" maxleng th="1000" [(ngModel)]="newNote.content"></textarea>
 
         <input id="small" type="submit" value="Add note" class="note-submit">
@@ -116,24 +116,24 @@
 <div class="note_editor" *ngIf="showNoteEditor">
   <div *ngIf="afAuth.user | async as user; else showLogin">
 
-    <form (submit)="editNote(user.uid, editor_note)" class="note-form">
-      <a (click)="hideNoteForm = !hideNoteForm">
-        <p id="large" class="note-title">New Note <strong [hidden]="!hideNoteForm">
-            <p id="smol" style="font-size: 0.7em;" class="note-tip-create-note">Click to open note creation</p>
-          </strong></p>
+    <form (submit)="editNote(user.uid, edit_note)" class="editor-note-form">
+      <a>
+        <strong>
+            <p id="large" class="note-tip-show-note">{{ edit_note.title }}</p>
+          </strong>
       </a>
       <!-- Note title -->
       <div>
         <label id="medium" for="note-input-title" class="note-input">Title</label>
-        <input id="medium" type="text" name="noteInputTitle" id="note-input-title" class="note-input"
-          [(ngModel)]="edit_note.title" maxlength="200" />
+        <input id="medium" style="font-size: 1.6em;" type="text" name="noteInputTitle" id="note-input-title" class="note-input"
+          [(ngModel)]="edit_note.title" maxlength="200" value="edit_note.title"/>
 
         <!-- Note content -->
         <label id="medium" for="note-input-content" class=" note-input">Content</label>
-        <textarea id="medium" type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30"
-          rows="10" maxleng th="1000" [(ngModel)]="edit_note.content"></textarea>
+        <textarea id="medium" style="font-size: 1.35em;" type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30"
+          rows="10" maxlength="1000" [(ngModel)]="edit_note.content">{{ edit_note.content }}</textarea>
 
-        <input id="small" type="submit" value="Add note" class="note-submit">
+        <input id="small" type="submit" value="Edit note" class="note-submit">
       </div>
     </form>
   </div>
