@@ -77,16 +77,15 @@ $text-secondary: #cad3d7;
 }
 
 .notes {
-
   li {
     list-style: none;
 
     .note-header {
       a.note-favorite {
         float: right;
-        margin-right: .3em;
+        margin-right: 0.3em;
         margin-top: -3em;
-        padding: .1em;
+        padding: 0.1em;
         cursor: pointer;
       }
     }
@@ -126,6 +125,21 @@ $text-secondary: #cad3d7;
 
   a.note-delete:hover {
     animation: aNoteDeleteHover 0.4s forwards;
+  }
+}
+
+.auth {
+  background-color: rgba($secondary, 0.1);
+  border-left: 0.7em solid $secondary;
+  border-radius: 0.3em;
+  text-align: center;
+
+  a {
+    color: $text-primary;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin: 1em;
+
   }
 }
 
