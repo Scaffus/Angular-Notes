@@ -12,49 +12,12 @@ $text-secondary: #CAD3D7;
 body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
-  // font-size: 18px;
 }
 
 .container {
   width: calc(80% + 10vmin);
   margin: 0 auto;
 }
-
-// header {
-//   background: $primary;
-//   padding: 1em 0;
-//   margin-bottom: 3em  ;
-
-//   a {
-//       color: white;
-//       text-decoration: none;
-//   }
-//   a.logo {
-//       font-weight: bold;
-//   }
-
-//   a.link {
-//     margin-left: 0.05em;
-//   }
-
-//   nav {
-//       float: right;
-
-//       ul {
-//           list-style-type: none;
-//           margin: 0;
-//           display: flex;
-
-//           li a {
-//               padding: calc(.7 + .5vmin);
-
-//               &:hover {
-//                   background: darken($primary, 10%);
-//               }
-//           }
-//       }
-//   }
-// }
 
 h1 {
   margin-top: calc(2em + 1vmin);

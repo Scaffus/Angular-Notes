@@ -9,10 +9,6 @@ $secondary-dark: #9ea7aa;
 $text-primary: #b9b9b9;
 $text-secondary: #cad3d7;
 
-// * {
-//   font-size: 1.05em;
-// }
-
 // Extra small - it's smol
 #smol {
   font-size: calc(0.4em + 0.2vmin);
@@ -58,7 +54,6 @@ a.logout:hover {
     color: $primary-dark;
     font-weight: 600;
     margin-bottom: 0;
-    // font-size: 2.5em;
     margin-top: 0;
     text-align: center;
   }
@@ -87,14 +82,9 @@ a.logout:hover {
     cursor: text;
   }
 
-  // input.note-input {
-  //   font-size: 1.5em;
-  // }
-
   textarea.note-input {
     overflow: auto;
     resize: none;
-    // font-size: 1.1em;
   }
 
   input.note-submit {
@@ -102,13 +92,10 @@ a.logout:hover {
     box-sizing: border-box;
     margin: 0 auto;
     text-align: center;
-
     border: 2px solid $secondary;
     border-radius: 0.3em;
     color: $secondary-dark;
     background-color: $secondary-light;
-
-    // font-size: 1em;
     padding: 0.3em;
   }
 }
@@ -207,10 +194,6 @@ a.logout:hover {
     text-align: left;
   }
 
-  // label {
-  //   font-size: 120%;
-  // }
-
   .auth-header {
     margin-bottom: 1.2em;
     margin-top: 1em;
@@ -246,7 +229,6 @@ a.logout:hover {
     border-radius: 0.3em;
     color: #868686;
     background-color: $secondary-light;
-    // font-size: 1em;
     padding: 0.3em;
     margin-bottom: 1em;
     cursor: pointer;
@@ -302,19 +284,13 @@ a.logout:hover {
       border: 2px solid $secondary;
       border-radius: 0.3em;
       text-align: left;
-      // padding: 0.3em;
       cursor: text;
       width: 90%;
     }
 
-    // input.note-input {
-    //   font-size: 1.5em;
-    // }
-
     textarea.note-input {
       overflow: auto;
       resize: none;
-      // font-size: 1.1em;
     }
 
     input.note-submit {

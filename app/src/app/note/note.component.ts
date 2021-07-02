@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from '../models/Note';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from "firebase/app";
 import "firebase/auth";
-import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
-import { timer } from 'rxjs';
+
 
 @Component({
   selector: 'app-note',
