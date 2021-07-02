@@ -1,24 +1,26 @@
-<a (click)="logoutUser()">Logout</a>
-
 <div class="container">
   <div class="wrapper" *ngIf="afAuth.user | async as user; else showLogin">
 
+    <div class="logout">
+      <a id="small" (click)="logoutUser()" class="logout">Logout</a>
+    </div>
+
     <form (submit)="addNote(user.uid)" class="note-form">
       <a (click)="hideNoteForm = !hideNoteForm">
-        <p class="note-title">New Note</p>
+        <p id="large" class="note-title">New Note <strong [hidden]="!hideNoteForm"><p id="smol" style="font-size: 0.7em;" class="note-tip-create-note">Click to open note creation</p></strong></p>
       </a>
       <!-- Note title -->
       <div [hidden]="hideNoteForm">
-        <label for="note-input-title" class="note-input">Title</label>
-        <input type="text" name="noteInputTitle" id="note-input-title" class="note-input" [(ngModel)]="newNote.title"
+        <label id="medium" for="note-input-title" class="note-input">Title</label>
+        <input id="medium" type="text" name="noteInputTitle" id="note-input-title" class="note-input" [(ngModel)]="newNote.title"
           maxlength="200" />
 
         <!-- Note content -->
-        <label for="note-input-content" class=" note-input">Content</label>
-        <textarea type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30" rows="10"
+        <label id="medium" for="note-input-content" class=" note-input">Content</label>
+        <textarea id="medium" type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30" rows="10"
           maxleng th="1000" [(ngModel)]="newNote.content"></textarea>
 
-        <input type="submit" value="Add note" class="note-submit">
+        <input id="small" type="submit" value="Add note" class="note-submit">
       </div>
     </form>
 
@@ -28,20 +30,22 @@
           <ul class="note">
             <!-- <a class="note-title" (click)="toggleDisplay()"><p class="note-title">{{ note.title }}</p></a> -->
             <div class="note-header">
-              <a class="note-title" (click)="hideme[note.id] = !hideme[note.id]" (*ngSwitchDefault)="hideme[id] = true">
+              <a id="large" class="note-title" (click)="hideme[note.id] = !hideme[note.id]" (*ngSwitchDefault)="hideme[id] = true">
                 <p class="note-title">{{ note.title }}</p>
+                <p id="smol" class="note-tip-show-content" [hidden]="hideme[note.id]">Click to show content</p>
               </a>
               <a class="note-favorite" (click)="debug(note)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-star"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                <svg *ngIf="noteIsFavorite(note)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="border: 2px solid orange;" fill="red" class="bi bi-star-fill" viewBox="0 0 16 16">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+                <svg *ngIf="noteIsFavorite(note)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                 </svg>
               </a>
             </div>
             <!-- <p class="note-content" [hidden]="isShow">{{ note.content }}</p> -->
-            <p class="note-content" [hidden]="!hideme[note.id]">{{ note.content }}</p>
-            <a class="note-delete" [hidden]="!hideme[note.id]" (click)="deleteNote(note)"
+            <p id="medium" class="note-content" [hidden]="!hideme[note.id]">{{ note.content }}</p>
+            <a id="medium" class="note-delete" [hidden]="!hideme[note.id]" (click)="deleteNote(note)"
               style="text-decoration: underline;">Delete</a>
           </ul>
         </div>
@@ -52,36 +56,48 @@
   <ng-template #showLogin>
     <div class="auth">
       <div class="auth-header">
-        <a (click)="showCreateUserForm()">Register</a>
-        <a (click)="showLoginUserForm()">Login</a>
+        <a id="large" class="title" (click)="showCreateUserFormF()">Register</a>
+        <a id="large" class="title" (click)="showLoginUserFormF()">Login</a>
       </div>
-      <div *ngif="showCreateUserForm == true">
+      <div *ngIf="showCreateUserForm">
+        <!-- [hidden]="!showCreateUserForm" -->
         <form (submit)="signUpWithEmailAndPassword()" #createForm="ngForm">
 
-          <label for="input-mail-register">Mail</label>
-          <input type="text" name="input-mail-register" [(ngModel)]="user.email" id="input-mail-register">
+          <label id="medium" for="input-mail-register">Mail</label>
+          <input id="medium"type="email" name="input-mail-register" class="input-mail-register" [(ngModel)]="user.email"
+            id="input-mail-register">
           <!-- <input type="text" name="input-mail" id="input-mail"> -->
 
-          <label for="input-password-register">Password</label>
-          <input type="password" name="input-password-register" [(ngModel)]="user.password"
-            id="input-password-register">
+          <label id="medium" for="input-password-register">Password</label>
+          <input id="medium" type="password" name="input-password-register" class="input-password-register"
+            [(ngModel)]="user.password" id="input-password-register">
           <!-- <input type="password" name="input-password" id="input-password"> -->
 
-          <input type="submit" [disabled]="!createForm.valid" value="Sign Up" class="submit-user-register">
+          <input id="medium" type="submit" [disabled]="!createForm.valid" value="Register" class="submit-user-register">
+          <br>
+          <a id="small" class="already-or-not-account">Already have an account ? <strong (click)="showLoginUserFormF()"
+              style="cursor: pointer;">Login</strong></a>
 
         </form>
       </div>
-      <div *ngIf="showLoginUserInputForm == true">
-        <form *ngif="showLoginUserForm" (submit)="signInWithEmailPassword()" #loginForm="ngForm">
-          <label for="input-mail-login">Mail</label>
-          <input type="text" name="input-mail-signin" [(ngModel)]="user.email" id="input-mail-signin">
+      <div *ngIf="showLoginUserForm">
+        <!-- [hidden]="!showLoginUserForm" -->
+        <form (submit)="signInWithEmailPassword()" #loginForm="ngForm">
+          <label id="medium" for="input-mail-login">Mail</label>
+          <input id="medium" type="email" name="input-mail-login" class="input-mail-login" [(ngModel)]="user.email"
+            id="input-mail-login">
           <!-- <input type="text" name="input-mail" id="input-mail"> -->
 
-          <label for="input-password-login">Password</label>
-          <input type="password" name="input-password-signin" [(ngModel)]="user.password" id="input-password-signin">
+          <label id="medium" for="input-password-login">Password</label>
+          <input id="medium" type="password" name="input-password-login" class="input-password-login" [(ngModel)]="user.password"
+            id="input-password-login">
           <!-- <input type="password" name="input-password" id="input-password"> -->
 
-          <input type="submit" [disabled]="!loginForm.valid" value="Sign In" class="submit-user-login">
+          <input id="medium" type="submit" [disabled]="!loginForm.valid" value="Login" class="submit-user-login">
+          <br>
+          <a id="small" class="already-or-not-account">Don't have an account ? <strong (click)="showCreateUserFormF()"
+              style="cursor: pointer;">Register</strong></a>
+
         </form>
       </div>
     </div>

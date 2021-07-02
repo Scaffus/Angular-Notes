@@ -7,6 +7,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-note',
@@ -33,8 +34,8 @@ export class NoteComponent implements OnInit {
   hideme = [false];
   hideNoteForm = true;
 
-  showLoginUserInputForm = false;
-  showCreateUserInputForm = false;
+  showLoginUserForm = false;
+  showCreateUserForm = false;
   user: User = new User();
   email:string | null = '';
   password:string | null = '';
@@ -51,6 +52,7 @@ export class NoteComponent implements OnInit {
       }
     });
   }
+
   selectItems(uid: string) {
     // this.noteItemsDoc = this.afs.doc<Note>('notes\\'  + uid + '\\notes')
     this.noteItemsDoc = this.afs.collection('notes').doc<Note>();
@@ -66,12 +68,8 @@ export class NoteComponent implements OnInit {
 
       // this.afs.collection('notes').doc(this.uid).collection('notes').doc(this.newNote.id)
       this.afs.collection('notes').doc(this.uid).collection('notes').doc(this.newNote.id).set(Object.assign({}, this.newNote))
-      // .catch((error) => { alert(error); });
+      .catch((error) => { alert(error); });
 
-      console.log(this.newNote.id)
-      // this.newNote = new Note();
-
-      console.log(this.newNote);
     }
   }
 
@@ -81,19 +79,15 @@ export class NoteComponent implements OnInit {
     console.log(note.id)
   }
 
+  noteIsFavorite(note: Note) {
+    return note.is_favorite;
+  }
+
   debug(note: Note) {
     console.log(note.is_favorite);
   }
 
   // user login and handling part
-
-  showLoginUserForm() {
-    this.showLoginUserInputForm = true;
-  }
-
-  showCreateUserForm() {
-    this.showCreateUserInputForm = true;
-  }
 
   signUpWithEmailAndPassword() {
     var email = this.user.email; // 'mail@mail.com';
@@ -143,12 +137,22 @@ export class NoteComponent implements OnInit {
 
     this.email = '';
     this.password = '';
-    this.showLoginUserInputForm = false;
-    this.showCreateUserInputForm = false;
+    this.showCreateUserForm = false;
+    this.showLoginUserForm = false;
+  }
+
+  showCreateUserFormF() {
+    this.showCreateUserForm = true;
+    this.showLoginUserForm = false;
+  }
+
+  showLoginUserFormF() {
+    this.showLoginUserForm = true;
+    this.showCreateUserForm = false;
   }
 
   cancelButton() {
-    this.showLoginUserInputForm = false;
-    this.showCreateUserInputForm = false;
+    this.showCreateUserForm = false;
+    this.showLoginUserForm = false;
   }
 }
