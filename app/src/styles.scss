@@ -19,6 +19,21 @@ body {
   margin: 0 auto;
 }
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: $primary-light;
+  color: white;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.header {
+  
+}
+
 h1 {
   margin-top: calc(2em + 1vmin);
 }

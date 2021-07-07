@@ -15,20 +15,13 @@ import { User } from '../models/User';
 })
 export class NoteComponent implements OnInit {
 
-  // notes: Note[] = [];
-  // notes$: Observable<Note[]> | undefined;
   newNote: Note = new Note();
   notes: Observable<any[]> | undefined;
 
-  // New system
   noteItemsDoc: AngularFirestoreDocument<Note> | undefined;
   noteItems: Observable<any[]> | undefined;
 
   uid = '';
-  // noteRef = ;
-  // noteRef = this.afs.collection('notes');
-  // noteRef = this.afs.collection('notes').doc(this.uid).collection('notes');
-  // newNote = this.store.collection('note').valueChanges({ idField: 'id' });
 
   hideme = [false];
   hideNoteForm = true;
@@ -57,7 +50,6 @@ export class NoteComponent implements OnInit {
   }
 
   selectItems(uid: string) {
-    // this.noteItemsDoc = this.afs.doc<Note>('notes\\'  + uid + '\\notes')
     this.noteItemsDoc = this.afs.collection('notes').doc<Note>();
   }
 
@@ -65,14 +57,14 @@ export class NoteComponent implements OnInit {
 
   async addNote(uid: string) {
     if (this.newNote.title && this.newNote.content != '') {
-      // this.notes.push(this.newNote);
       this.newNote.id = this.afs.createId();
       this.newNote.is_favorite = false;
 
-      // this.afs.collection('notes').doc(this.uid).collection('notes').doc(this.newNote.id)
       this.afs.collection('notes').doc(this.uid).collection('notes').doc(this.newNote.id).set(Object.assign({}, this.newNote))
       .catch((error) => { alert(error); });
-
+      this.hideNoteForm = true;
+      this.newNote.title = '';
+      this.newNote.content = '';
     }
   }
 
@@ -85,6 +77,10 @@ export class NoteComponent implements OnInit {
   openNoteEditor(note: Note) {
     this.edit_note = note;
     this.showNoteEditor = true;
+  }
+
+  closeNoteEditor() {
+    this.showNoteEditor = false;
   }
 
   async editNote(uid: string, note: Note) {
@@ -104,20 +100,15 @@ export class NoteComponent implements OnInit {
   // user login and handling part
 
   signUpWithEmailAndPassword() {
-    var email = this.user.email; // 'mail@mail.com';
-    var password = this.user.password; // 'passWord';
+    var email = this.user.email;
+    var password = this.user.password;
 
     if (email != '' && password.length >= 8) {
-      // firebase.initializeApp(environment.firebase)
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           var user = userCredential.user;
 
           console.log('Created user: ' + user)
-        })
-        .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
         })
     } else {
       console.log('Password must be at lease 8 characters, size of current ' + password.length)
@@ -129,17 +120,12 @@ export class NoteComponent implements OnInit {
     var password = this.user.password;
 
     if (email != '' && password.length >= 8) {
-      // firebase.initializeApp(environment.firebase)
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           var user = userCredential.user;
 
           console.log('Signed in with mail: ' + user?.email)
         })
-        .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-        });
     } else {
       console.log('Password must be at lease 8 characters, size of current ' + password.length)
     }
@@ -163,10 +149,5 @@ export class NoteComponent implements OnInit {
   showLoginUserFormF() {
     this.showLoginUserForm = true;
     this.showCreateUserForm = false;
-  }
-
-  cancelButton() {
-    this.showCreateUserForm = false;
-    this.showLoginUserForm = false;
   }
 }

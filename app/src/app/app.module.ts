@@ -7,12 +7,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
+import { ChangelogComponent } from './changelog/changelog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NoteComponent,
+    ChangelogComponent,
     // AuthComponent
   ],
   imports: [

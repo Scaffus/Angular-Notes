@@ -1,0 +1,306 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+
+$primary: #bdbdbd;
+$primary-light: #efefef;
+$primary-dark: #8d8d8d;
+$secondary: #cfd8dc;
+$secondary-light: #ffffff;
+$secondary-dark: #9ea7aa;
+$text-primary: #b9b9b9;
+$text-secondary: #cad3d7;
+
+// Extra small - it's smol
+#smol {
+  font-size: calc(0.4em + 0.2vmin);
+}
+
+#small {
+  font-size: calc(0.8em + 0.6vmin);
+}
+
+#medium {
+  font-size: calc(0.8em + 1.1vmin);
+}
+
+#large {
+  font-size: calc(1em + 1.8vmin);
+}
+
+a.logout {
+  color: $text-primary;
+  cursor: pointer;
+  border: 2px solid $secondary;
+  padding: 0.2em;
+  border-radius: 0.3em;
+  background-color: $secondary-light;
+}
+
+a.logout:hover {
+  animation: tprimaryToRed 0.3s forwards;
+}
+
+.note-form {
+  border-left: calc(0.5em + 0.4vmin) solid $secondary;
+  border-radius: 0.3em;
+  background-color: rgba($secondary, 0.08);
+  margin-top: 3em;
+  padding: 0.5em;
+  
+
+  .note-tip-create-note {
+    color: $secondary;
+  }
+
+  .note-title {
+    color: $primary-dark;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  label.note-input,
+  input.note-input,
+  textarea.note-input {
+    display: block;
+    width: 90%;
+    margin-left: 1em;
+    color: $secondary-dark;
+    font-family: "Nunito", sans-serif;
+  }
+
+  input.note-input,
+  textarea.note-input {
+    margin-bottom: 1.3em;
+    border: 2px solid $secondary;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    cursor: text;
+  }
+
+  textarea.note-input {
+    overflow: auto;
+    resize: none;
+  }
+
+  input.note-submit {
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid $secondary;
+    border-radius: 0.3em;
+    color: $secondary-dark;
+    background-color: $secondary-light;
+    padding: 0.3em;
+  }
+}
+
+.notes {
+  li {
+    list-style: none;
+
+    .note-header {
+      a.note-favorite {
+        float: right;
+        margin-right: 0.3em;
+        margin-top: -3em;
+        padding: 0.1em;
+        cursor: pointer;
+      }
+    }
+
+    div.note {
+      border-left: calc(0.5em + 0.3vmin) solid $secondary;
+      border-radius: 0.3em;
+      background-color: rgba($secondary, 0.08);
+
+      .note-tip-show-content {
+        color: $secondary;
+      }
+
+      .note-title {
+        color: $primary-dark;
+        font-weight: 600;
+        margin-bottom: 0;
+        margin-left: 0;
+        cursor: pointer;
+      }
+
+      .note-title-plus {
+        color: $primary-dark;
+        margin-bottom: 0;
+        cursor: pointer;
+      }
+
+      .note-content {
+        color: $primary-dark;
+        margin-bottom: 1.5em;
+      }
+
+      a.note-delete {
+        cursor: pointer;
+        color: $text-primary;
+      }
+
+      a.note-edit {
+        margin: 0.2em;
+        cursor: pointer;
+        color: $text-primary;
+        margin-left: 0.6em;
+      }
+
+      a.note-delete:hover {
+        animation: tprimaryToRed 0.4s forwards;
+      }
+
+      a.note-edit:hover {
+        animation: tprimaryToBlue 0.4s forwards;
+      }
+    }
+  }
+
+  div.note:hover {
+    animation: divNoteHover 0.2s forwards;
+  }
+
+  a.note-favorite:hover {
+    animation: aNoteFavoriteHover 0.5s forwards;
+  }
+}
+
+.auth {
+  background-color: rgba($secondary, 0.15);
+  border-left: calc(0.5em + 0.4vmin) solid $secondary;
+  border-radius: 0.3em;
+  text-align: center;
+  width: fit-content;
+  padding-right: calc(2em + 1.8vmin);
+  padding-left: calc(2em + 1.8vmin);
+  height: fit-content;
+  padding: 2em;
+  margin: 0 auto;
+  position: relative;
+  top: calc(7em + 5vmin);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+
+  .auth-header {
+    margin-bottom: 1.2em;
+    margin-top: 1em;
+    a:hover {
+      animation: aAuthHeaderHover 0.3s forwards;
+    }
+    a:target {
+      animation: aAuthHeaderHover 0.3s forwards;
+    }
+  }
+
+  a.title {
+    color: $text-primary;
+    // font-size: 1.5em;
+    cursor: pointer;
+    margin: 1em;
+    width: 50%;
+  }
+
+  a.already-or-not-account {
+    color: $text-secondary;
+    // font-size: 0.85em;
+    margin-bottom: 1em;
+  }
+
+  input.submit-user-register,
+  input.submit-user-login {
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid $secondary;
+    border-radius: 0.3em;
+    color: #868686;
+    background-color: $secondary-light;
+    padding: 0.3em;
+    margin-bottom: 1em;
+    cursor: pointer;
+  }
+
+  .input-mail-login,
+  .input-password-login,
+  .input-mail-register,
+  .input-password-register {
+    margin-bottom: 1.3em;
+    border: 2px solid $secondary;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    cursor: text;
+    width: 50%;
+  }
+}
+
+.note_editor {
+  background-color: rgba($secondary-dark, 0.8);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+
+
+}
+
+@keyframes divNoteHover {
+  from {
+    background-color: rgba($secondary, 0.08);
+  }
+  to {
+    background-color: rgba($secondary, 0.18);
+  }
+}
+
+@keyframes tprimaryToRed {
+  from {
+    color: $text-primary;
+  }
+  to {
+    color: red;
+    border-color: red;
+  }
+}
+
+@keyframes tprimaryToBlue {
+  from {
+    color: $text-primary;
+  }
+  to {
+    color: rgb(0, 119, 255);
+  }
+}
+
+@keyframes aNoteFavoriteHover {
+  from {
+    color: $text-primary;
+  }
+  to {
+    color: orange;
+  }
+}
+
+@keyframes aAuthHeaderHover {
+  from {
+    color: $text-primary;
+  }
+  to {
+    color: #616060;
+  }
+}

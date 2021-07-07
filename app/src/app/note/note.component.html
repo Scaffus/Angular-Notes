@@ -1,108 +1,112 @@
 <div class="container">
-  <div class="wrapper" *ngIf="afAuth.user | async as user; else showLogin">
+  <div *ngIf="afAuth.user | async as user; else showLogin">
 
     <div class="logout">
       <a id="small" (click)="logoutUser()" class="logout">Logout</a>
     </div>
 
-    <form (submit)="addNote(user.uid)" class="note-form">
-      <a (click)="hideNoteForm = !hideNoteForm">
-        <p id="large" class="note-title">New Note <strong [hidden]="!hideNoteForm">
-            <p id="smol" class="note-tip-create-note">Click to open note creation</p>
-          </strong></p>
-      </a>
-      <!-- Note title -->
-      <div [hidden]="hideNoteForm">
-        <label id="medium" for="note-input-title" class="note-input">Title</label>
-        <input id="medium" style="font-size: 1.6em;" type="text" name="noteInputTitle" id="note-input-title" class="note-input"
-          [(ngModel)]="newNote.title" maxlength="200" />
+    <div class="note-form">
+      <style>
+        .note-input {
+          font-size: 1.35em;
+          resize: none;
+          overflow: auto;
+        }
+      </style>
+      <form (submit)="addNote(user.uid)">
+        <a (click)="hideNoteForm = !hideNoteForm">
+          <p id="large" class="note-title">New Note <strong [hidden]="!hideNoteForm">
+              <p id="smol" class="note-tip-create-note">Click to open note creation</p>
+            </strong></p>
+        </a>
+        <div [hidden]="hideNoteForm" class="note-form-body">
+          <label id="medium" for="note-input-title" class="note-input">Title</label>
+          <input id="medium" style="font-size: 1.6em;" type="text" name="noteInputTitle" id="note-input-title"
+            class="note-input" [(ngModel)]="newNote.title" maxlength="200" />
 
-        <!-- Note content -->
-        <label id="medium" for="note-input-content" class=" note-input">Content</label>
-        <textarea id="medium" style="font-size: 1.35em;" type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30"
-          rows="10" maxleng th="1000" [(ngModel)]="newNote.content"></textarea>
+          <label id="medium" for="note-input-content" class=" note-input">Content</label>
+          <textarea id="medium" type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30"
+            rows="10" maxleng th="1000" [(ngModel)]="newNote.content"></textarea>
 
-        <input id="small" type="submit" value="Add note" class="note-submit">
-      </div>
-    </form>
+          <input id="small" type="submit" value="Add note" class="submit">
+        </div>
+
+      </form>
+
+    </div>
+
 
     <div class="notes">
       <li *ngFor="let note of notes | async; let id = index;">
-        <div class="note">
-          <ul class="note">
-            <!-- <a class="note-title" (click)="toggleDisplay()"><p class="note-title">{{ note.title }}</p></a> -->
-            <div class="note-header">
-              <a id="large" class="note-title" (click)="hideme[note.id] = !hideme[note.id]"
-                (*ngSwitchDefault)="hideme[id] = true">
-                <p class="note-title">{{ note.title }}</p>
-                <p id="smol" class="note-tip-show-content" [hidden]="hideme[note.id]">Click to show content</p>
-              </a>
-              <a class="note-favorite" (click)="debug(note)">
-                <svg *ngIf="noteIsFavorite(note)" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                  style="border: 2px solid orange;" fill="red" class="bi bi-star-fill" viewBox="0 0 16 16">
-                  <path
-                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                </svg>
-                <svg *ngIf="noteIsFavorite(note)" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                  fill="orange" class="bi bi-star-fill" viewBox="0 0 16 16">
-                  <path
-                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                </svg>
-              </a>
-            </div>
-            <!-- <p class="note-content" [hidden]="isShow">{{ note.content }}</p> -->
-            <p id="medium" class="note-content" [hidden]="!hideme[note.id]">{{ note.content }}</p>
-            <a id="medium" class="note-delete" [hidden]="!hideme[note.id]" (click)="deleteNote(note)"
-              style="text-decoration: underline;">Delete</a>
-            <a id="medium" class="note-edit" [hidden]="!hideme[note.id]" (click)="openNoteEditor(note)"
-              style="text-decoration: underline;">Edit</a>
-          </ul>
-        </div>
+        <ul class="note">
+          <div class="note-header">
+            <a id="large" class="note-title" (click)="hideme[note.id] = !hideme[note.id]"
+              (*ngSwitchDefault)="hideme[id] = true">
+              <p class="note-title">{{ note.title }}</p>
+              <p id="smol" class="note-tip-show-content" [hidden]="hideme[note.id]">Click to show content</p>
+            </a>
+          </div>
+          <p id="medium" class="note-content" [hidden]="!hideme[note.id]">{{ note.content }}</p>
+          <a id="small" class="note-delete" [hidden]="!hideme[note.id]" (click)="deleteNote(note)"
+            style="text-decoration: underline; cursor: pointer;">Delete</a>
+          <a id="small" class="note-edit" [hidden]="!hideme[note.id]" (click)="openNoteEditor(note)"
+            style="text-decoration: underline; cursor: pointer; margin-left: 0.7em; ">Edit</a>
+        </ul>
       </li>
     </div>
   </div>
 
   <ng-template #showLogin>
+    <style>
+      a {
+        cursor: pointer;
+      }
+
+      .title {
+        margin-left: 1em;
+      }
+
+      .already-or-not-account {
+        margin-bottom: 0;
+        margin-top: 1em;
+      }
+    </style>
     <div class="auth">
-      <div class="auth-header">
+      <div>
         <a id="large" class="title" (click)="showCreateUserFormF()">Register</a>
         <a id="large" class="title" (click)="showLoginUserFormF()">Login</a>
       </div>
       <div *ngIf="showCreateUserForm">
-        <!-- [hidden]="!showCreateUserForm" -->
         <form (submit)="signUpWithEmailAndPassword()" #createForm="ngForm">
 
           <label id="medium" for="input-mail-register">Mail</label>
           <input id="medium" type="email" name="input-mail-register" class="input-mail-register"
             [(ngModel)]="user.email" id="input-mail-register">
-          <!-- <input type="text" name="input-mail" id="input-mail"> -->
 
           <label id="medium" for="input-password-register">Password</label>
           <input id="medium" type="password" name="input-password-register" class="input-password-register"
             [(ngModel)]="user.password" id="input-password-register">
-          <!-- <input type="password" name="input-password" id="input-password"> -->
 
-          <input id="medium" type="submit" [disabled]="!createForm.valid" value="Register" class="submit-user-register">
+          <input id="medium" type="submit" style="font-size: 1em; margin-top: 2em; margin-bottom: 0;"
+            [disabled]="!createForm.valid" value="Register" class="submit">
           <br>
-          <a id="small" class="already-or-not-account">Already have an account ? <strong (click)="showLoginUserFormF()"
-              style="cursor: pointer;">Login</strong></a>
+          <a id="small" class="already-or-not-account">Already have an account ? <strong
+              (click)="showLoginUserFormF()">Login</strong></a>
 
         </form>
       </div>
       <div *ngIf="showLoginUserForm">
-        <!-- [hidden]="!showLoginUserForm" -->
         <form (submit)="signInWithEmailPassword()" #loginForm="ngForm">
           <label id="medium" for="input-mail-login">Mail</label>
-          <input required id="medium" type="email" name="input-mail-login" class="input-mail-login" [(ngModel)]="user.email"
-            id="input-mail-login">
-          <!-- <input type="text" name="input-mail" id="input-mail"> -->
+          <input required id="medium" type="email" name="input-mail-login" class="input-mail-login"
+            [(ngModel)]="user.email" id="input-mail-login">
 
           <label id="medium" for="input-password-login">Password</label>
           <input required id="medium" type="password" name="input-password-login" class="input-password-login"
             [(ngModel)]="user.password" id="input-password-login">
-          <!-- <input type="password" name="input-password" id="input-password"> -->
 
-          <input id="medium" type="submit" [disabled]="!loginForm.valid" value="Login" class="submit-user-login">
+          <input id="medium" type="submit" style="font-size: 1em; margin-top: 2em; margin-bottom: 0;"
+            [disabled]="!loginForm.valid" value="Login" class="submit">
           <br>
           <a id="small" class="already-or-not-account">Don't have an account ? <strong (click)="showCreateUserFormF()"
               style="cursor: pointer;">Register</strong></a>
@@ -115,25 +119,45 @@
 
 <div class="note_editor" *ngIf="showNoteEditor">
   <div *ngIf="afAuth.user | async as user; else showLogin">
-
+    <style>
+      .note-input {
+        resize: none;
+        overflow: auto;
+        padding: .2em;
+        width: 99%;
+        margin-bottom: 1.3em;
+        text-align: left;
+        cursor: text;
+        display: block;
+        color: #9ea7aa;;
+        font-family: "Nunito", sans-serif;
+      }
+      .note-tip-show-note {
+        font-family: 1.2em;
+      }
+      .cancel {
+        text-decoration: underline;
+      }
+    </style>
     <form (submit)="editNote(user.uid, edit_note)" class="editor-note-form">
       <a>
         <strong>
-            <p id="large" class="note-tip-show-note">{{ edit_note.title }}</p>
-          </strong>
+          <p id="large" class="note-tip-show-note">{{ edit_note.title }}</p>
+        </strong>
       </a>
-      <!-- Note title -->
       <div>
-        <label id="medium" for="note-input-title" class="note-input">Title</label>
-        <input id="medium" style="font-size: 1.6em;" type="text" name="noteInputTitle" id="note-input-title" class="note-input"
-          [(ngModel)]="edit_note.title" maxlength="200" value="edit_note.title"/>
+        <label id="large" for="note-input-title" class="note-input-label">Title</label>
+        <input id="medium" style="font-size: 1.6em;" type="text" name="noteInputTitle" id="note-input-title"
+          class="note-input" [(ngModel)]="edit_note.title" maxlength="200" value="edit_note.title" />
 
-        <!-- Note content -->
-        <label id="medium" for="note-input-content" class=" note-input">Content</label>
-        <textarea id="medium" style="font-size: 1.35em;" type="text" name="noteInputContent" id="note-input-content" class="note-input" cols="30"
-          rows="10" maxlength="1000" [(ngModel)]="edit_note.content">{{ edit_note.content }}</textarea>
+        <label id="large" for="note-input-content" class="note-input-label">Content</label>
+        <textarea id="medium" style="font-size: 1.35em;" type="text" name="noteInputContent" id="note-input-content"
+          class="note-input" cols="30" rows="10" maxlength="1000"
+          [(ngModel)]="edit_note.content">{{ edit_note.content }}</textarea>
 
-        <input id="small" type="submit" value="Edit note" class="note-submit">
+        <input id="small" style="font-size: 1.4em;" type="submit" value="Save" class="submit">
+        <br><br>
+        <a id="small" class="cancel" (click)="closeNoteEditor()">Cancel</a>
       </div>
     </form>
   </div>
